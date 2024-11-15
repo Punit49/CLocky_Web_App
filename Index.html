@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clocky Web App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <div class="Hamburger">
+                    <input type="checkbox" id="toggleHam" class="Ham-toggle">
+                    <label for="toggleHam" class="labelHam">
+                        <i class="fa-solid fa-bars Burger"></i>
+                    </label>
+
+                <!-- Hamburger Bar -->
+                    <div class="hamSideBar">
+                        <div class="hamTitle">
+                            <span class="pageTitle">
+                                Clocky
+                            </span>
+                            <label for="toggleHam">
+                                <i class="fa-solid cross fa-xmark"></i>
+                            </label>
+                        </div>
+                        <ul class="hamList">
+                            <li> 
+                                <div class="leftHam">
+                                    <i class="fa-regular fa-clock"></i>
+                                    <span>Alarm Clock</span>
+                                </div>
+                                <i class="fa-solid RIcon fa-chevron-right"></i>
+                            </li>
+                            <li> 
+                                <div class="leftHam">
+                                    <i class="fa-solid fa-earth-americas"></i>
+                                    <span>World Clock</span>
+                                </div>
+                                <i class="fa-solid RIcon fa-chevron-right"></i>
+                            </li>
+                            <li> 
+                                <div class="leftHam">
+                                    <i class="fa-solid fa-hourglass-end"></i>
+                                    <span>Timer</span>
+                                </div>
+                                <i class="fa-solid RIcon fa-chevron-right"></i>
+                            </li>
+                            <li> 
+                                <div class="leftHam">
+                                    <i class="fa-solid fa-stopwatch"></i>
+                                    <span>Stopwatch</span>
+                                </div>
+                                <i class="fa-solid RIcon fa-chevron-right"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pageTitle">
+                    Clocky
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="sideBar">
+
+                <div class="alarmOption options">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>Alarm Clock</span>
+                </div>
+                
+                <div class="worldClockOption options">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <span>World Clock</span>
+                </div>
+
+                <div class="timerOption options">
+                    <i class="fa-solid fa-hourglass-end"></i>
+                    <span>Timer</span>
+                </div>
+
+                <div class="stopwatchOption options">
+                    <i class="fa-solid fa-stopwatch"></i>
+                    <span>Stopwatch</span>
+                </div>
+
+            </div>
+
+            <div class="container">
+
+                <!-- Alarm Clock -->
+                <div class="alarmContainer content">
+
+                   <div class="alarmContent">
+                        <div class="currentTime">
+                            <div class="Time DT">
+
+                            </div>
+                            <div class="date DT">
+
+                            </div>
+                        </div>
+                        <div class="setAlarmButton">
+                            <div class="popPopButton Hidden">
+
+                            </div>
+                        </div>
+                   </div>
+
+                   <!-- Add alarm button -->
+                    <button class="addBtn" onclick="toggled()">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add Alarm</span>
+                    </button>
+
+                    <div class="currentAlarm curHidden">
+                        <div class="currAlarm">
+                            <div class="alarmTitle">
+                                Alarm
+                            </div>
+                            <div class="curAlarmTime">
+                                <i class="fa-regular fa-clock"></i>
+                                <div class="alarmTime">
+                                    10:00 AM
+                                </div>
+                            </div>
+                            <div class="alarmCount">
+                                00:00:00
+                            </div>
+                            <button class="stopAlarmBtn">
+                                Stop Alarm!
+                            </button>
+                        </div>
+                    </div>
+            
+                </div>
+
+                <!-- World Clock -->
+                <div class="worldContainer content InVisible">
+                    <!-- Current Time And Zone -->
+                   <div class="alarmContent">
+                        <div class="currentTime">
+                            <div class="Time DT">
+                                
+                            </div>
+                            <div class="date DT">
+
+                            </div>
+                        </div>
+                        <div class="setAlarmButton">
+                            <div class="popPopButton Hidden">
+
+                            </div>
+                        </div>
+                   </div>
+
+                   <!-- Add More Time Zones -->
+                   <button class="addBtn " onclick="toggled2()">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add Zone</span>
+                    </button>
+
+                   <!-- Time Zones -->
+                   <div class="timeZones">
+                   </div>
+
+                </div>
+
+                <!-- Timer -->
+                <div class="timerContainer content InVisible">
+                    <div class="showTime">
+                        00:00:00
+                    </div>
+                    <div class="btnSection">
+                        <button class="Edit addBtn">Edit</button>
+                        <button class="reset addBtn">Reset</button>
+                        <button class="Start addBtn" onclick="toggled2()">Start</button>
+                    </div>
+                    <div class="defaultTime">
+
+                    </div>
+                </div>
+
+
+            </div>
+        </main>
+
+        <!-- <footer></footer> -->
+    </div>
+
+    <!-- Code for popup window -->
+    <div class="popUp">
+        <div class="editText">Edit Alarm</div>
+        <div class="setAlarm">
+            <div class="setTime">
+                <div class="setHour set">
+                    <label for="forHour">Hour</label>
+                    <select class="forHour" name="forHour" id="">
+                        
+                    </select>
+                </div>
+                <div class="setMinute set">
+                    <label for="forMinute">Minutes</label>
+                    <select class="forMinute" name="forMinute" id="">
+
+                    </select>
+                </div>
+            </div>
+            <div class="titleVal">
+                <span>Title</span>
+                <input type="text" placeholder="Add Title Here" class="title" value="Alarm">
+            </div>
+
+            <div class="rintone">
+                <label for="ringtone">Ringtone</label>
+                <select name="ringtone" class="ringtoneSelect">
+                    <option value="./Ringtone/beep.mp3">Beep</option>
+                    <option value="./Ringtone/Morning Flower.mp3">Morning Flower</option>
+                    <option value="./Ringtone/Classic Alarm.mp3">Classic</option>
+                    <option value="./Ringtone/Rooster.wav">Rooster</option>
+                    <option value="./Ringtone/Calm Music.mp3">Calm Music</option>
+                    <option value="./Ringtone/alarm.mp3">Alarm</option>
+                    <option value="./Ringtone/Extreme Alarm.mp3">Extreme Alarm</option>
+                    <option value="./Ringtone/Iphone Alarm.mp3">Iphone</option>
+                    <option value="./Ringtone/Positive.mp3">Positive Vibes</option>
+                    <option value="./Ringtone/Rain Sound.mp3">Rain Sound</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="popBtns">
+            <div class="left">
+                <button class="testRing">
+                    Test
+                </button>
+            </div>
+           <div class="right">
+                <button class="cancel" onclick="toggled()">
+                    Cancel
+                </button>
+                <button class="submit">
+                    Submit
+                </button>
+           </div>
+        </div>
+    </div>
+
+    <!-- Popup when alarm rings -->
+    <div class="popUpForAlarm">
+        <div class="popUpWhenRings">
+            <span class="ringTitle">Alarm Time!</span>
+            <div class="ringSection">
+                  <div class="alarmRingTitle">
+                    Alarm
+                  </div>
+                  <div class="alarmRingTime">
+                      <i class="fa-regular fa-clock"></i>
+                      <div class="alarmRungTime">
+                          
+                      </div>
+                  </div>
+                  <div class="alarmRingCount">
+                      00:00:00
+                  </div>
+                  <button class="okBtn">
+                      Ok
+                  </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Time Zone -->
+    <div class="timePopUp InVisible ">
+        <div class="timeHeading">
+             <span>Add Clock</span>
+             <i class="fa-solid cross2 fa-xmark" onclick="toggled2()"></i>
+        </div>
+        <div class="SelectTime">
+             <div class="selectCountry">
+                 <label for="sCountry">Select Country</label>
+                 <select name="country" id="sCountry">
+                    
+                 </select>
+             </div>
+             <div class="selectTimeZone">
+                 <label for="sTimeZone">Time Zone</label>
+                 <select name="country" id="sTimeZone">
+                     <option value="Asia/Kolkata">
+                        Kolkata
+                     </option>
+                 </select>
+             </div>
+             <div class="addTitle">
+                 <label for="cTitle">Title</label>
+                 <input type="text" value="New Delhi" id="cTitle" placeholder="Add Title">
+             </div>
+        </div>
+        <div class="timeBtn">
+             <button class="cBtn" onclick="toggled2()">
+                 Cancel
+             </button>
+             <button class="tBtn" onclick="toggled2()">
+                 Ok
+             </button>
+        </div>
+
+    </div>
+
+    <!-- Add TImer -->
+    <div class="timerPopUp InVisible">
+       <div class="timerHead editText">
+           <span> Edit Timer! </span>
+           <i class="fa-solid cross2 fa-xmark" onclick="toggled2()"></i>
+       </div>
+
+       <div class="timerBody">
+            <div class="bodyTop">  
+                <span>
+                    <input type="radio" checked onchange="isCountOrDate()" id="countdown" name="tillWhen">
+                    <label for="countdown" class="count-Radio">Countdown</label>
+                    <input type="radio" onchange="isCountOrDate()" id="tillDate" name="tillWhen">
+                    <label for="tillDate">Count Till Date</label>
+                </span>
+            </div>
+
+            <div class="bodyMid">
+                <div class="changeTime">
+                    <div class="timerHr">
+                        <label for="setTimerHour">Hours</label>
+                        <select name="setTimerHour" id="setTimerHour">
+                            <option value="00" selected="selected">00</option>
+                        </select>
+                    </div>
+                    
+                    <div class="timerMin">
+                        <label for="setTimerMint">Minutes</label>
+                        <select name="setTimerMint" id="setTimerMint">
+                            <option value="00" selected="selected">00</option>
+                        </select>
+                    </div>
+                    
+                    <div class="timerSec">
+                        <label for="setTimerSec">Seconds</label>
+                        <select name="setTimerSec" id="setTimerSec">
+                            <option value="00" selected="selected">00</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="onZero">
+                    <p class="zeroHead">On Zero</p>
+                    <div class="zeroContent">
+                       <div class="01">
+                            <input type="radio" id="stopTimer" name="timerOption" value="stopTimer">
+                            <label for="stopTimer">Stop Timer</label>
+                       </div>
+                       <div class="02">
+                            <input type="radio" id="RestartTimer" name="timerOption" value="RestartTimer">
+                            <label for="RestartTimer">Stop Timer</label>
+                       </div>
+                       <div class="01">                       
+                            <input type="radio" id="runStop" name="timerOption" value="runStop">
+                            <label for="runStop">Run as STopwatch</label>
+                       </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Alternate code when count till is selected -->
+            <div class="bodyMid2">
+                <label for="timeDate">Date</label>
+                <div class="setTimerDate">
+                    <div class="timerInputs">
+                        <input id="dateInput" type="text">
+                        <div class="calenderI">
+                            <i class="fa-regular calenderIcon fa-calendar-days"></i>
+                        </div>
+
+                        <div class="calenderPopUp">
+                            <div class="dayContainer">
+                                <div class="yearAndMonth">
+
+                                </div>
+                                
+                                <div class="calenderDays">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="monthSection">
+                                <div class="YearSection">
+                                   2024
+                                </div>
+                                <div class="MonthList">
+                                    <div class="month">Jan</div>
+                                    <div class="month">Feb</div>
+                                    <div class="month">Mar</div>
+                                    <div class="month">Apr</div>
+                                    <div class="month">May</div>
+                                    <div class="month">Jun</div>
+                                    <div class="month">Jul</div>
+                                    <div class="month">Aug</div>
+                                    <div class="month">Sep</div>
+                                    <div class="month">Oct</div>
+                                    <div class="month">Nov</div>
+                                    <div class="month">Dec</div>                              
+                                </div>
+                            </div>
+
+                            <div class="yearBox">
+                                <div class="CurYearTitile">
+                                    2024
+                                </div>
+                                <div class="yearContainer">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setTimerTime">
+                        <div class="inputTime">
+                            <input type="text" id="timeInput" value="12:00 PM">
+                            <div class="timeI">
+                                <i class="fa-regular timerIcon fa-clock"></i>
+                            </div>
+                        </div>      
+                        
+                        <!-- Minutes Popup -->
+                        <div class="MinutePopUp">
+                            <div class="MinuteTitle">
+                                AM
+                            </div>
+                            <div class="MinutesBody">
+                                <span class="Mints">12:00</span>
+                                <span class="Mints">12:05</span>
+                                <span class="Mints">12:10</span>
+                                <span class="Mints">12:15</span>
+                                <span class="Mints">12:20</span>
+                                <span class="Mints">12:25</span>
+                                <span class="Mints">12:30</span>
+                                <span class="Mints">12:35</span>
+                                <span class="Mints">12:40</span>
+                                <span class="Mints">12:45</span>
+                                <span class="Mints">12:50</span>
+                                <span class="Mints">12:55</span>
+                            </div>
+                        </div> 
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="bodyBottom">
+                <div class="rintone rings">
+                    <label for="ringtone">Ringtone</label>
+                    <div class="selectRing">
+                        <div class="ringtoneContainer">
+                            <select name="ringtone" class="ringtoneSelectTimer timerRing">
+                                <option value="./Ringtone/beep.mp3">Beep</option>
+                                <option value="./Ringtone/Morning Flower.mp3">Morning Flower</option>
+                                <option value="./Ringtone/Classic Alarm.mp3">Classic</option>
+                                <option value="./Ringtone/Rooster.wav">Rooster</option>
+                                <option value="./Ringtone/Calm Music.mp3">Calm Music</option>
+                                <option value="./Ringtone/alarm.mp3">Alarm</option>
+                                <option value="./Ringtone/Extreme Alarm.mp3">Extreme Alarm</option>
+                                <option value="./Ringtone/Iphone Alarm.mp3">Iphone</option>
+                                <option value="./Ringtone/Positive.mp3">Positive Vibes</option>
+                                <option value="./Ringtone/Rain Sound.mp3">Rain Sound</option>
+                            </select>
+    
+                            <div class="playTimer">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                        </div>
+
+                        <input type="file" accept="audio/*" id="selectFile" style="display: none;">
+                        <div class="chooseFile">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="MytimerTitle">
+                    <label for="myTimerT">Title</label>
+                    <input type="text" id="myTimerT" placeholder="Timer">
+                </div>
+
+                <div class="showMsg">
+                    <input type="checkbox" id="showMsg">
+                    <label for="showMsg">Show Messege</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timerFoot">
+            <div class="timerButtons">
+                <div class="leftBtn">
+                    <button class="testTimer">
+                        Test
+                    </button>
+                </div>
+
+               <div class="rightBtn">
+                    <button class="cancelTimer">
+                        Cancel
+                    </button>
+                    <button class="startTimer">
+                        Submit
+                    </button>
+               </div>
+            </div>
+        </div>
+    </div>
+    
+    <audio id="audio1" >
+         <source src="http://www.sousound.com/music/healing/healing_01.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio src="" id="timerAudio">
+
+    </audio>
+    <button class="arrBtn" style="z-index: 150; color: red; background-color: blue; height: 2rem; position: absolute; top: 50%;">Click to See Array </button>
+    
+    <script src="Time.js"></script>
+    <script src="Script.js"></script>
+    
+    <!-- <script src="CountryList.js"></script>
+    <script src="worldClock.js"></script>
+    <script src="Timer.js"></script> -->
+    
+</body>
+</html>

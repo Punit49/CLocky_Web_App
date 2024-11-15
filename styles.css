@@ -1,0 +1,1266 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* color: white; */
+}
+
+body{
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    background-color: black;
+}   
+
+.wrapper{
+    height: 100%;
+    width: 100%;
+}
+
+header{
+    height: 4.7rem;
+    width: 100%;
+    background-color: rgb(61, 60, 60);
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.Burger{
+    font-size: 2rem;
+}
+
+.Hamburger{
+    visibility: hidden;
+    cursor: pointer;
+}
+
+#toggleHam{
+    display: none;
+}
+
+nav{
+    display: block;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    width: 59.5%;
+}
+
+.pageTitle{
+    font-size: 2.5rem;
+    font-weight: 700;
+    user-select: none;
+}
+
+main{
+    background-color: black;
+    display: flex;
+    flex-grow: 1;
+    height: 100vh;
+    position: absolute;
+    top: 4.7rem;
+}
+
+.sideBar{
+    background-color: rgb(83, 83, 83);
+    width: 7rem;
+    height: 100%;
+    padding: 1rem 0; 
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+}
+
+.options i{
+    font-size: 3rem;
+    margin-bottom: .5rem;
+}
+
+.container{
+    width: calc(100vw - 7rem);
+    margin-left: 7rem;
+    padding: 1rem;
+    margin-top: 3rem;
+}
+
+.content{
+    width: 100%;
+    height: fit-content;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
+/* .alarmContainer{
+     display: none; 
+} */
+
+.currentTime{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Time{
+    font-size: 6rem;
+}
+
+.date{
+    font-size: 2rem;
+}
+
+.defualtAlarm{
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dAlarm{
+    height: 5rem;
+    width: 30rem;
+    outline: 0.1px solid rgb(82, 82, 82);
+    border-radius: 5px;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.aText{
+    font-size: 1.8rem;
+    margin-bottom: .2rem;
+}
+
+.toggle-container {
+    width: 60px;
+    height: 30px;
+    background-color: #515151;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+}
+  
+.toggle-button {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(250, 250, 250);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: left 0.3s ease;
+}
+
+.toggle-container.active {
+  background-color: #06468b;
+}
+
+.toggle-container.active .toggle-button {
+  left: 30px; 
+}
+  
+.addBtn span, .addBtn i{
+    color: black;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.addBtn{
+    cursor: pointer;
+    padding: .5rem;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background-color: rgb(6, 190, 6);
+}
+
+/* Popup */
+.popUp{
+    font-size: 1.4rem;
+    height: fit-content;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #6a6a6a;
+    /* display: none; */
+}
+
+.setAlarm{
+    padding: 1.5rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.editText{
+    background-color: rgb(82, 81, 81);
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.setTime{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.setTime select{
+    width: 10rem;
+    height: 2rem; 
+    color: black;
+}
+
+.setTime select option{
+    color: black;
+}
+
+.title{
+    padding: .3rem;
+    font-size: 1.2rem;
+    height: 2.3rem;
+}
+
+.setTime select, .title, .cancel, .ringtoneSelectTimer, #cTitle, .cBtn, .tBtn, .chooseFile i{
+    color: black;
+}
+
+.set, .titleVal{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.title, .popBtns button, .setTime select, .stopAlarmBtn, 
+.okBtn, .ringtoneSelectTimer, .timePopUp select, .timePopUp input, 
+.cBtn, .tBtn, .timerButtons button, #setTimerSec, #setTimerMint, #setTimerHour,
+#myTimerT, #timeInput, #dateInput{
+
+    outline: none;
+    border: none;
+}
+
+.popBtns{
+    padding: 1.5rem;
+    display: flex;
+    gap: .7rem;
+    justify-content: space-between;
+    border-top: 1px solid;
+}
+
+.popBtns button{
+    padding: .7rem 1.3rem;
+    border-radius: 1px;
+    text-align: center;
+    font-size: .9rem;
+}
+
+.cancel{
+    margin-bottom: 10px;
+}
+
+.testRing{
+    color: white;
+    background-color: rgba(90, 170, 90);
+}
+
+.submit, .Ok{
+    color: white;
+    background-color: rgb(90, 170, 90);
+}
+
+/* Class for popup */
+.Active{
+    filter: blur(20px);
+    /* user-select: none; */
+}
+
+/* Logic for popup */
+.popUp, .timePopUp, .timerPopUp{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, .30);
+    /* visibility: visible; */
+    /* z-index: 500; */
+    opacity: 0;
+    display: none;
+    transition: .5s;
+}
+
+.Active2{
+    transition: display 2s;
+    top: 50%;
+    /* visibility: visible; */
+    display: block;
+    opacity: 1;
+}
+
+/* Current Alarm */
+.currentAlarm{
+    background-color: #242424;
+    width: 85%;
+    height: 16rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    padding-top: 1.5rem;
+}
+
+.currAlarm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+
+.curAlarmTime{
+    align-items: center;
+    display: flex;
+    gap: .8rem;
+}
+
+.curAlarmTime i{
+    font-size: 2.5rem;
+}
+
+.alarmTime{
+    font-size: 2rem;
+}
+
+.alarmCount{
+    font-size: 1.8rem;
+}
+
+.stopAlarmBtn{
+    padding:  .7rem .9rem;
+    background-color: red;
+    font-size: 1.3rem;
+}
+
+.curHidden{
+    display: none;
+}
+
+.alarmTitle{
+    letter-spacing: 2px;
+    font-size: 2rem;
+}
+
+.alarmContainer{
+    color: white;
+}
+
+/* PopUp When Alarm Rings */
+.popUpForAlarm{
+    z-index: 10;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    height: fit-content;
+    background-color: #979798;
+    transform: translate(-45%, -40%);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, .30);
+    width: 70%;
+    max-width: 20rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+    margin: auto;
+    /* display: none; */
+}
+
+.popUpForAlarm *{
+    color: black;
+}
+
+.popUpWhenRings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ringTitle{
+    width: 100%;
+    text-align: center;
+    padding: .5rem;
+    font-size: 2rem;
+    background-color: #5b5a5a;
+    letter-spacing: 2px;
+}
+
+.alarmRingTitle{
+    font-size: 2rem;
+}
+
+.ringSection{
+    padding: 1.3rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .7rem;
+}
+
+.alarmRingTime{
+    display: flex;
+    gap: .4rem;
+    font-size: 2rem;
+    align-items: center;
+}
+
+.alarmRungTime{
+    color: black;
+}
+
+.alarmRingCount{
+    font-size: 2rem;
+}
+
+.okBtn{
+    font-size: 1.2rem;
+    background-color: lightcoral;
+    padding: .5rem .3rem;
+    font-weight: 600;
+    width: 80%;
+}
+
+.ringClass{
+    left: 30px;
+}
+
+.ringHidden{
+    top: 50%;
+    /* left: 50%; */
+    visibility: visible;
+    opacity: 1;
+    transition: .3s;
+}
+
+/* Ringtone */
+.rintone{
+    width: 100%;
+    height: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+
+.ringtoneSelectTimer, .playTimer{
+    height: 100%;
+    padding: .5rem;
+    font-size: 1.2rem;
+}
+
+.ringtoneSelectTimer{
+    width: 100%;
+}
+
+.ringtoneSelectTimer option{
+    max-width: 100%;
+    color: black;
+}
+
+/* Hamburger */
+.hamSideBar{
+    position: fixed;
+    top: 0;
+    background-color: #3d3c3c;
+    width: 80vw;
+    height: 100vh;
+    /* z-index: 2000; */
+    transition: left 0.5s;
+    left: -80vw;
+}
+
+.hamList{
+    padding-top: .7rem;
+}
+
+.hamList li{
+    list-style-type: none;
+    font-size: 1rem;
+    padding: 1rem 2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.RIcon{
+    font-weight: -100;
+    font-size: 1rem;
+    color: grey;
+}
+
+.cross{
+    font-size: 1.6rem;
+}
+
+.hamTitle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem 1rem 1.2rem;
+    border-bottom: 1px solid grey;
+    background-color: #393838;
+}
+
+.Ham-toggle:checked + .labelHam + .hamSideBar{
+    left: 0;
+}
+
+/* World Clock */
+.worldContainer{
+    /* ? Here */
+    display: flex;
+    /* z-index: 200; */
+    color: white;
+    height: fit-content;
+}
+
+.timeZones{
+    max-width: 80%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 2rem;
+}
+
+.timeItems{
+    width: 100%;
+    height: fit-content;
+    height: 12rem;
+    display: flex;
+    place-self: stretch;
+    flex-direction: column;
+    display: block;
+    background-color: #111111;
+}
+
+.timeHeader{
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    padding-left: .9rem;
+    padding-right: 1.3rem;
+    margin-top: 1rem;
+    height: 25%;
+    border-bottom: 2px solid rgb(52, 52, 52);
+}
+
+.delete{
+    font-size: 1.1rem;
+}
+
+.timeContent{
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .4rem;
+}
+
+.zoneTime{
+    font-size: 2rem;
+}
+
+.zoneText{
+    font-size: 18px;
+}
+
+.timePopUp{
+    height: 23rem;
+    width: 80%;
+    max-width: 25rem;
+    background-color: #6a6a6a;
+}
+
+.timeHeading{
+    width: 100%;
+    background-color: #525151;
+    height: 15%;
+    padding: 1rem ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem;
+}
+
+.cross2{
+    font-size: 1.3rem;
+}
+
+.SelectTime{
+    width: 100%;
+    padding: 1rem;
+    padding-right: 2rem;
+    height: 65%;
+    border-bottom: 2px solid rgb(149, 147, 147);
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.timePopUp select, #cTitle{
+    width: 100%;
+    height: 2rem;
+}
+
+.SelectTime label{
+    font-size: 1rem;
+}
+
+.SelectTime select, .SelectTime select option{
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.SelectTime div{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+#cTitle{
+    padding: .5rem;
+    font-size: 1.2rem;
+}
+
+.timeBtn{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    padding-right: 1.5rem;
+}
+
+.cBtn, .tBtn{
+    padding: .3rem 1rem;
+    font-size: 1rem;
+    height: 2.1rem;
+}
+
+.cBtn{
+    background-color: rgb(167, 166, 166);
+}
+
+.tBtn{
+    background-color: rgb(90, 170, 90);
+    color: white;
+    height: 2.2rem;
+}
+
+.show{
+    display: grid;
+}
+
+.timerContainer{
+    gap: 1rem;
+    font-size: 7rem;
+    text-align: center;
+}
+
+.showTime{
+    width: 100%;
+    height: 65%;
+}
+
+.defaultTime{
+    height: 35%;
+    width: 100%;
+}
+
+.timerContainer .addBtn{
+    font-size: 1.5rem;
+}
+
+.btnSection button{
+    padding: .5rem 1rem;
+    border-radius: 1px;
+}
+
+.Edit{
+    background-color: rgb(58, 120, 162);
+}
+
+.reset{
+    background-color: rgb(140, 140, 8);
+}
+
+.timerHead{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #525151;
+    width: 100%;
+    padding: 1.3rem;
+}
+
+.timerPopUp{
+    display: none;
+    top: 50%;
+    width: 40%;
+    /* z-index: 19; */
+    opacity: 1;
+    visibility: visible;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.timerPopUp input[type="radio"], [type="checkbox"] {
+    transform: scale(1.5);
+}
+
+.chooseFile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .4rem;
+    align-self: end;
+    background-color: whitesmoke;
+    width: 3rem;
+    height: 100%;
+}
+
+.selectRing{
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    height: 2.5rem;
+}
+
+.rings{
+    display: flex;
+    flex-direction: column;
+}
+
+.timerRing{
+    width: 85%;
+    font-size: 1rem;
+}
+
+.timerRing option{
+    color: black;
+}
+
+.MytimerTitle{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+#myTimerT{
+    height: 2.5rem;
+    font-size: 1rem;
+    padding-left:  .5rem;
+}
+
+.timerBody{
+    padding: 1.3rem;
+    background-color: #5f5f5f;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.timerButtons{
+    display: flex;
+    justify-content: space-between;
+    gap: .3rem;
+}
+
+.timerButtons button{
+    padding: .5rem 1rem;
+    font-weight: 600;
+}
+
+.leftBtn button{
+    background-color: rgb(10, 112, 159);
+}
+
+.rightBtn button:nth-child(1){
+    background-color: rgb(77, 76, 76);  
+}
+
+.rightBtn button:nth-child(2){
+    background-color: rgb(68, 139, 68);
+}
+
+.changeTime{
+    display: flex;
+    justify-content: space-between;
+}
+
+.changeTime > div{
+    display: flex;
+    flex-direction: column;
+    width: 27%;
+}
+
+.changeTime select{
+    height: 2rem;
+    font-size: 1rem;
+    color: black;
+    padding: .3rem;
+}
+
+.changeTime *{
+    color: black;
+}
+
+.count-Radio{
+    margin-right: 3vw;
+}
+
+.bodyTop input, .zeroContent input, .showMsg input{
+    margin-right: .2rem;
+}
+
+.bodyMid2{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.setTimerDate{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.setTimerTime{
+    width: 48%;
+}
+
+#timeInput, #dateInput{
+    width: 100%;
+    height: 2.5rem;
+    font-size: 1rem;
+    padding-left: .5rem;
+}
+
+.timerInputs{
+    display: flex;
+    width: 48%;
+    position: relative;
+}
+
+.calenderPopUp{
+    position: absolute;
+    z-index: 10;
+    top: 3rem;
+    height: fit-content;
+    background-color: whitesmoke;
+    color: black;
+    padding: 1rem;
+    gap: .2rem;
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.yearAndMonth{
+    cursor: pointer;
+    text-align: center;
+    height: 2rem;
+    transition: color .1s;
+    width: 100%;
+}
+
+.calenderDays{
+    transition: all 10s;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: .5rem;
+}
+
+.calenderDays div{
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+    text-align: center;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    font-size: .9rem;
+}
+
+.dayOnHover:hover, .month:hover, .TDigits:hover, .Mints:hover{
+    background-color: rgb(207, 206, 206);
+    transition: background-color .2s;
+}
+
+.dayOfCalender, .month{
+    cursor: pointer;
+}
+
+.calenderI{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    padding-right: .7rem;
+}
+
+.calenderI i{
+    color: black;
+}
+
+.bodyMid{
+    display: flex;
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.changeTime label, .onZero p{
+    margin-bottom: .8rem;
+}
+
+.onZero{
+    width: 80%;
+}
+
+.zeroContent{
+    display: flex;
+    justify-content: space-between;
+}
+
+.bodyBottom{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.timerFoot{
+    background-color: #5f5f5f;
+    border-top: 1px solid grey;
+    padding: 1.3rem;
+}
+
+.rightBtn{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.pageTitle, .sideBar, .hamSideBar, .Burger
+, .changeTime label, .timerButtons button{
+    color: whitesmoke;
+}
+
+.monthSection{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.YearSection{
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.MonthList{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.month, .years{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    padding: 18px 10px;
+    color: #5e5d5d;
+    font-size: .9rem;
+}
+
+.yearContainer{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.dayContainer{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.CurYearTitile{
+    text-align: center;
+}
+
+.inputTime{
+    display: flex;
+    height: 2.5rem;
+    position: relative;
+}
+
+.inputTime i{
+    font-size: 1.5rem;
+    color: gray;
+    margin-top: .5rem;
+}
+
+.timeI{
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    padding-right: .5rem;
+}
+
+.timeVisible{
+    display: none;
+    flex-direction: column;
+    top: 13.2rem;
+    position: absolute;
+    z-index: 2;
+    width: 250px;
+    background-color: white;
+    color: #525151; 
+}
+
+.TimeSection{
+    display: flex;
+    padding: .8rem;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.TimeDigits{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    row-gap: .3rem;
+}
+
+.PmAmTitle, .TDigits{
+    text-align: center;
+}
+
+.TDigits{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+}
+
+.MinutePopUp{
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: black;
+    z-index: 2;
+    top: 13rem;
+    padding: 1rem;
+}
+
+.MinuteTitle{
+    margin-bottom: .8rem;
+    text-align: center;
+}
+
+.MinutesBody{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+}
+
+.Mints{
+    cursor: pointer;
+    padding: .6rem;
+}
+
+.playTimer{
+    min-width: 2rem;
+    width: 20%;
+    text-align: center;
+    background-color: white;
+    color: gray;
+}
+
+.playTimer i{
+    margin-top: .2rem;
+}
+
+.ringtoneContainer{
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* Universal */
+.yearAndMonth, .YearSection, .CurYearTitile{
+    color: rgb(215, 215, 215);
+}
+
+.yearAndMonth:hover, .YearSection:hover, .CurYearTitile:hover{
+    color: #636363;
+}
+
+
+/* Class for display visible or not */
+.MandY{
+    color: #242424;
+}
+
+.InVisible{
+    display: none;
+}
+
+.NotInVisible{
+    display: flex;
+}
+
+.VisiBle{
+    display: block;
+}
+
+.dateActive{
+    background-color: rgb(82, 82, 215);
+    color: whitesmoke;
+}
+
+.ShowGrid{
+    display: grid;
+}
+
+@media (max-width: 850px) {
+    nav{
+        display: flex;
+        margin-bottom: 0;
+    }
+    .Hamburger{
+        visibility: visible;
+    }
+    .sideBar{
+        visibility: hidden;
+    }
+    .container{
+        margin-left: 0;
+        width: 100vw;
+    }
+    .popUpForAlarm{
+        left: 47%;
+    }
+}
+
+@media (max-width: 550px) {
+    .Time{
+        font-size: 12vw;
+    }
+}
+
+@media (max-width: 420px) {
+    .Time{
+        font-size: 15vw;
+    }
+    .date{
+        font-size: 8vw;
+    }
+    .alarmCount, .alarmTime, .alarmTitle{
+        font-size: 25px;
+    }
+    .currAlarm i{
+        font-size: 1.7rem;
+    }
+    .stopAlarmBtn{
+        font-size: 1.1rem;
+    }
+    .popUp{
+        width: 90%;
+    }
+    .setTime select{
+        width: 30vw;
+    }
+    .popUpWhenRings div{
+        font-size: 1.6rem;
+    }
+    .ringTitle{
+        font-size: 1.7rem;
+    }
+    header{
+        height: 8vh;
+    }
+    main{
+        top: 3.7rem;
+    }
+    .pageTitle{
+        font-size: 1.8rem;
+    }
+    .timeZones{
+        grid-template-columns: repeat(auto-fill, minmax(80%, 1fr));
+    }
+}
+
+@media (max-width: 355px) {
+    .popBtns button{
+        font-size: .8rem;
+    }
+    .cancel{
+        font-size: 10rem;
+    }
+    .stopAlarmBtn{
+        font-size: 15px;
+    }
+    .hamList li{
+        font-size: 1rem;
+        padding: 1rem;
+    }
+    .cross{
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 325px) {
+    .popBtns{
+        gap: 10vw;
+    }
+}
+
+@media (max-width: 260px) {
+    .alarmCount, .alarmTime, .alarmTitle{
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 225px) {
+    .popBtns{
+        flex-wrap: wrap;
+    }
+}
