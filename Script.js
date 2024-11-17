@@ -60,18 +60,12 @@ for (const min of Minute) {
 const WakeAlarm = (hour, min, sec) => { 
     let alarmTime = new Date();
     let now = new Date();
-
-    console.log(hour);
-    console.log(min);
-
-    alarmTime.setHours(hour);
     
+    alarmTime.setHours(hour);
     alarmTime.setMinutes(min);
-    alarmTime.setSeconds(sec);
-    console.log(alarmTime);
+    alarmTime.setSeconds(0);
     alarmTime.setMilliseconds(0);
     
-
     // Retrieve the alarmHasRung status from localStorage
     let alarmHasRung = JSON.parse(localStorage.getItem("alarmHasRung")) || false;
     
@@ -84,7 +78,6 @@ const WakeAlarm = (hour, min, sec) => {
     let wakeMeAt = alarmTime.getTime() - now.getTime();
     // console.log(wakeMeAt);
     
-
     localStorage.setItem("alarmEndTime", alarmTime.getTime().toString());
     return wakeMeAt;
 }
@@ -146,14 +139,12 @@ const ShowAndClear = (alarmInMs, MyHour, HourVal, MyMin) => {
         let myStop = localStorage.getItem("Stop");
 
         if (myStop === "false") {  
-            console.log(myStop);
             PlayAudio(); 
             showPopUP(MyHour, MyMin);
             ResetAlarm(); 
             // alarmHasRung = true;
             localStorage.setItem("alarmHasRung", JSON.stringify(true));
         } else {
-            console.log(myStop);
             // If stop was pressed, don't play the alarm and reset it
             localStorage.setItem("Stop","false");
             ResetAlarm();

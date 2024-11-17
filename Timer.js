@@ -433,24 +433,6 @@ const showMinute = (selector) => {
     })
 };
 
-const fileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
-};
-
-const base64ToBlob = (base64) => {
-    const binary = atob(base64.split(",")[1]);
-    const array = [];
-    for(let i = 0; i < binary.length; i++) {
-        array.push(binary.charCodeAt(i));
-    }
-    return new Blob([new Uint8Array(array)], {type: "audio/mp3"});
-};
-
 function addInObject(key, val) {
     let newKey = key.split(".")[0];
     ringArray[newKey] = val;
@@ -472,19 +454,10 @@ const createRing = (selector, ringName, yes) => {
     
     if(yes) {
         addInObject(ringName, newOption.value);
-    } else {
-        newOption.value = selector;
-    }
+    } 
 }
 
 selectFile.addEventListener("change", async () => {
-    const file = selectFile.files[0];
-    if(file) {
-        const base64String = await fileToBase64(file);
-        localStorage.setItem(file.name, base64String);
-        addInObject(file.name, base64String);
-    }
-
     let ringName = selectFile.files[0].name;
     let ringStr = ringName.split(".");
     let filePath = selectFile.value;
@@ -528,63 +501,4 @@ window.addEventListener("load", () => {
             timerPopUp2.classList.remove("NotInVisible");
         }
     });
-
-    let sTRingArr = JSON.parse(localStorage.getItem("ringArr"));
-    
-    if(typeof sTRingArr === "object") {
-        for (const element in sTRingArr) {
-            let ringN = String(element).split("\\").pop();
-            createRing(element, ringN, false);
-        } 
-    }
 });
-
-let timerAudio;
-
-playTimerBtn.addEventListener("click", () => {
-    let selectedOption = ringSelect.options[ringSelect.selectedIndex];
-    console.log("Selected option:", selectedOption);
-
-    const base64String = localStorage.getItem(selectedOption.text);
-    console.log("Base64 string:", base64String);
-
-    if (base64String) {
-        const audioBlob = base64ToBlob(base64String);
-        const audioUrl = URL.createObjectURL(audioBlob);
-
-        if (!timerAudio) {
-            timerAudio = new Audio(audioUrl);
-            timerAudio.loop = false;  // Prevent loop if not needed
-        } else {
-            timerAudio.src = audioUrl;  // Update the source on each click
-        }
-
-        if (timerAudio.paused) {
-            timerAudio.play().catch(error => {
-                console.error("Error playing audio:", error);
-            });
-        } else {
-            timerAudio.pause();
-        }
-
-        // Clear the object URL after playback to prevent memory leaks
-        timerAudio.onended = () => {
-            URL.revokeObjectURL(audioUrl);
-        };
-
-    } else {
-        console.error("audio not found");
-    }
-});
-
-
-let arrBtn = document.querySelector(".arrBtn");
-arrBtn.addEventListener("click", () => {
-    // for (const element in ringArray) {
-    //     console.log(element);
-    //     console.log(ringArray[element]);
-    // };
-    let test64 = localStorage.getItem(ringSelect.value);
-    console.log(test64);
-    
-})
