@@ -31,6 +31,11 @@ let storedHour = JSON.parse(localStorage.getItem("Hour"));
 let selectedRing = document.querySelector(".ringtoneSelect");
 let testBtn = document.querySelector(".testRing");
 
+// Define time constants
+const oneDayInMs = (24 * 60 * 60 * 1000);  
+const oneHourInMs = (60 * 60 * 1000);      
+const oneMinInMs = (60 * 1000); 
+
 // Current Time 
 const displayTime = () => {
     for(let i = 0; i<time.length; i++){
@@ -82,21 +87,21 @@ const WakeAlarm = (hour, min, sec) => {
     return wakeMeAt;
 }
 
-// Countdown Timer - 
-const countDownTimer = (hr, min) => {
-    let distance  = WakeAlarm(hr, min, .01);
-
-    // Define time constants
-    const oneDayInMs = (24 * 60 * 60 * 1000);  
-    const oneHourInMs = (60 * 60 * 1000);      
-    const oneMinInMs = (60 * 1000);  
-
-    // Calculate days, hours, minutes, and seconds remaining
+function returnTime(distance){
     let Hour = Math.floor((distance % oneDayInMs) / oneHourInMs);
     let Mint = Math.floor((distance % oneHourInMs) / oneMinInMs);
     let Sec = Math.floor((distance % oneMinInMs) / 1000); 
+    return [Hour, Mint, Sec];
+}
 
-    alarmCount.innerText = `${Hour}:${Mint}:${Sec}`;
+// Countdown Timer - 
+const countDownTimer = (hr, min) => {
+    let distance  = WakeAlarm(hr, min);
+ 
+    // Calculate days, hours, minutes, and seconds remaining
+    const ReTime = returnTime(distance);
+
+    alarmCount.innerText = `${ReTime[0]}:${ReTime[1]}:${ReTime[2]}`;
 }
 
 // Current Alarm Mini Window - 

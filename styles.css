@@ -100,6 +100,7 @@ main{
 }
 
 .content{
+    color: white;
     width: 100%;
     height: fit-content;
     margin: 0 auto;
@@ -720,17 +721,17 @@ main{
 }
 
 .timerPopUp{
-    /* display: none; */
     top: 50%;
-    width: 40%;
-    /* z-index: 19; */
+    left: 56%;
+    width: 50%;
+    max-width: 30rem;
     opacity: 1;
     visibility: visible;
     font-size: 1.2rem;
     color: white;
 }
 
-.timerPopUp input[type="radio"], [type="checkbox"] {
+.timerPopUp input[type="radio"], .timerPopUp [type="checkbox"] {
     transform: scale(1.5);
 }
 
@@ -934,7 +935,7 @@ main{
 
 .bodyMid{
     display: flex;
-    display: none;
+    /* display: none; */
     flex-direction: column;
     gap: 1.5rem;
 }

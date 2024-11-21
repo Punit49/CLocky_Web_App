@@ -54,8 +54,8 @@ for(let i = 1; i<100; i++){
 }
 
 function isCountOrDate() {
+    bodyMid2.classList.toggle("InVisible"); // display block
     bodyMid.classList.toggle("InVisible"); //display none
-    bodyMid2.classList.toggle("NotInVisible"); // display block
 }
 
 // Showing Date Format In Input -
@@ -265,8 +265,16 @@ let ringSelect = document.querySelector(".ringtoneSelectTimer");
 
 let ringArray = JSON.parse(localStorage.getItem("ringArr")) || {};
 let playTimerBtn = document.querySelector(".playTimer");
-// let timerAudio = document.querySelector("#timerAudio");
 let timerFlag = true;
+const timerPopUp = document.querySelector(".timerPopUp");
+
+let StartTimer = document.querySelector(".startTimer");
+const hrInput = document.querySelector("#setTimerHour");
+const mintInput = document.querySelector("#setTimerMint");
+let secInput = document.querySelector("#setTimerSec");
+
+let timerTime = document.querySelector(".timerTime");
+const timerCount = document.querySelector(".timerCount");
 
 const createTimeElemnt = () => {
     let newElement = document.createElement("div");
@@ -484,6 +492,65 @@ selectFile.addEventListener("change", async () => {
     }
 });
 
+// Toggling when submit, X, is clicked. 
+const MyToggle = () => {
+    timerPopUp.classList.toggle("InVisible");
+}
+
+// ? Handeling Submit Button -
+function PlayTimer(source){
+    timerAudio.src = ringSelect.value;
+    timerAudio.play();
+}
+
+function distanceCal(){
+    let hrInMs = hrInput.value * 3600000;
+    let minInMs = mintInput.value * 60000;
+    let secInMs = secInput.value * 1000;
+    return hrInMs + minInMs + secInMs;
+}
+
+// localStorage.clear();
+
+let timerInterval;
+function showTimer(totalTimeInSeconds){
+    timerInterval = setInterval(() => {
+        if (totalTimeInSeconds <= 0) {
+            PlayTimer();
+            clearInterval(timerInterval);
+            localStorage.setItem("totalSeconds", null);
+            return;
+        }
+
+        totalTimeInSeconds--;
+        localStorage.setItem("totalSeconds", JSON.stringify(totalTimeInSeconds));
+        let Days = Math.floor((totalTimeInSeconds / 86400));
+        const remainingTotalSec = totalTimeInSeconds % 86400;
+        const hrs = Math.floor(remainingTotalSec / 3600).toString().padStart(2, "0");
+        const mins = Math.floor((remainingTotalSec % 3600) / 60).toString().padStart(2, "0");
+        const secs = (remainingTotalSec % 60).toString().padStart(2, "0");
+
+        timerTime.innerHTML = `<p>${Days}<sub>Days</sub>${hrs}:${mins}:${secs}</p>`;
+    }, 1000);
+}
+
+function returnInputTime(){
+    const hours = parseInt(hrInput.value || 0);
+    const minutes = parseInt(mintInput.value || 0);
+    const seconds = parseInt(secInput.value || 0);
+    let totalTimeInSeconds = hours * 3600 + minutes * 60 + seconds + 1;
+    return totalTimeInSeconds;
+}
+
+StartTimer.addEventListener("click", () => {
+    const totalTimeInSeconds = returnInputTime();
+
+    localStorage.setItem("totalSeconds", JSON.stringify(totalTimeInSeconds));
+    clearInterval(timerInterval);
+    showTimer(totalTimeInSeconds);
+});
+
+
 window.addEventListener("load", () => {
     SelectCur(dayOfCalender);
     SelectCur(Months);
@@ -501,4 +568,10 @@ window.addEventListener("load", () => {
             timerPopUp2.classList.remove("NotInVisible");
         }
     });
+
+    // Submit btn
+    let totalSeconds = JSON.parse(localStorage.getItem("totalSeconds"));
+    if(totalSeconds){
+        showTimer(totalSeconds);
+    }
 });

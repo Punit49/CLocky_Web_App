@@ -174,12 +174,33 @@
                 <!-- Timer -->
                 <div class="timerContainer content">
                     <div class="showTime">
-                        00:00:00
+
+                        <div class="alarmContent timerTime">
+                            <div class="currentTime">
+                                <div class="Time DT">
+    
+                                </div>
+                                <div class="date DT">
+    
+                                </div>
+                            </div>
+                            <div class="setAlarmButton">
+                                <div class="popPopButton Hidden">
+    
+                                </div>
+                            </div>
+                       </div>
+
+                    <!-- When Timer Starts -->
+                    <div class="timerCount alarmContent InVisible">
+                        0<sub>Days</sub> 00:00:00
+                    </div>
+
                     </div>
                     <div class="btnSection">
-                        <button class="Edit addBtn">Edit</button>
-                        <button class="reset addBtn">Reset</button>
-                        <button class="Start addBtn" onclick="toggled2()">Start</button>
+                        <button class="Edit addBtn InVisible">Edit</button>
+                        <button class="reset addBtn InVisible">Reset</button>
+                        <button class="Start addBtn" onclick="MyToggle()">Start</button>
                     </div>
                     <div class="defaultTime">
 
@@ -316,13 +337,13 @@
     <div class="timerPopUp InVisible">
        <div class="timerHead editText">
            <span> Edit Timer! </span>
-           <i class="fa-solid cross2 fa-xmark" onclick="toggled2()"></i>
+           <i class="fa-solid cross2 fa-xmark" onclick="MyToggle()"></i>
        </div>
 
        <div class="timerBody">
             <div class="bodyTop">  
                 <span>
-                    <input type="radio" checked onchange="isCountOrDate()" id="countdown" name="tillWhen">
+                    <input type="radio" checked onfocus="isCountOrDate()" id="countdown" name="tillWhen">
                     <label for="countdown" class="count-Radio">Countdown</label>
                     <input type="radio" onchange="isCountOrDate()" id="tillDate" name="tillWhen">
                     <label for="tillDate">Count Till Date</label>
@@ -362,19 +383,18 @@
                        </div>
                        <div class="02">
                             <input type="radio" id="RestartTimer" name="timerOption" value="RestartTimer">
-                            <label for="RestartTimer">Stop Timer</label>
+                            <label for="RestartTimer">Restart Timer</label>
                        </div>
-                       <div class="01">                       
+                       <div class="03">                       
                             <input type="radio" id="runStop" name="timerOption" value="runStop">
                             <label for="runStop">Run as STopwatch</label>
                        </div>
                     </div>
                 </div>
-
             </div>
 
             <!-- Alternate code when count till is selected -->
-            <div class="bodyMid2">
+            <div class="bodyMid2 InVisible">
                 <label for="timeDate">Date</label>
                 <div class="setTimerDate">
                     <div class="timerInputs">
@@ -395,7 +415,8 @@
                             </div>
 
                             <div class="monthSection">
-                                <div
+                                <div class="YearSection">
+                                    2024
                                 </div>
                                 <div class="MonthList">
                                     <div class="month">Jan</div>
@@ -508,10 +529,10 @@
                 </div>
 
                <div class="rightBtn">
-                    <button class="cancelTimer">
+                    <button class="cancelTimer" onclick="MyToggle()">
                         Cancel
                     </button>
-                    <button class="startTimer">
+                    <button class="startTimer" onclick="MyToggle()">
                         Submit
                     </button>
                </div>
@@ -528,9 +549,9 @@
     </audio>
     <button class="arrBtn" style="z-index: 150; color: red; background-color: blue; height: 2rem; position: absolute; top: 50%;">Click to See Array </button>
     
+    <script src="Timer.js"></script> 
     <script src="Time.js"></script>
     <script src="Script.js"></script>
-    <script src="Timer.js"></script> 
     
     <!-- <script src="CountryList.js"></script>
     <script src="worldClock.js"></script> -->
