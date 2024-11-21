@@ -81,8 +81,7 @@ const WakeAlarm = (hour, min, sec) => {
 
     // Calculate the time left until the alarm
     let wakeMeAt = alarmTime.getTime() - now.getTime();
-    // console.log(wakeMeAt);
-    
+
     localStorage.setItem("alarmEndTime", alarmTime.getTime().toString());
     return wakeMeAt;
 }
