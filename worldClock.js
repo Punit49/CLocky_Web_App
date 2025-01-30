@@ -16,6 +16,7 @@ let timeZoneList = [];
 let zoneIntervals = {};
 let zoneCount = 0;
 const timeZoneElements = {};
+let wrapper = document.querySelector(".wrapper");
 
 for (const count in CountryList) {
     let newOption = document.createElement("option");
@@ -148,6 +149,6 @@ window.addEventListener("load", () => {
 });
 
 function toggled2(){
-    timePopUp.classList.toggle("Active2");
-    Wrapper.classList.toggle("Active");
+    timePopUp.classList.toggle("InVisible");
+    wrapper.classList.toggle("Active");
 }

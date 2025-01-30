@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -1128,6 +1130,12 @@ main{
 
 .yearAndMonth:hover, .YearSection:hover, .CurYearTitile:hover{
     color: #636363;
+}
+
+.alarmContent{
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 
