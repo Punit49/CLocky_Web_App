@@ -462,7 +462,8 @@ const switchStart = () => {
     startOrStopBtn.innerText = "";
     startOrStopBtn.style.backgroundColor = "green";
     startOrStopBtn.innerText = "Start";
-    isStop = false;
+    isStop = true;
+    startStopFlag = true;
     // clearInterval(timerInterval);
 }
 
@@ -471,13 +472,8 @@ const switchStop = () => {
     // clearInterval(timerInterval);
     startOrStopBtn.style.backgroundColor = "red";
     startOrStopBtn.innerText = "Stop";
-    isStop = true;
-    // clearInterval(timerInterval);
-    let RMT = JSON.parse(localStorage.getItem("totalSeconds"));
-    console.log(RMT);
-    // let curSeconds = JSON.parse(localStorage.getItem("totalSeconds"));
-    // localStorage.setItem("StoredSeconds", JSON.stringify(curSeconds));
-
+    isStop = false;
+    startStopFlag = false;
 }
 
 chooseFile.addEventListener("click", () => {
@@ -526,13 +522,13 @@ selectFile.addEventListener("change", async () => {
 });
 
 const resetTimer = () => {
-    timerAudio.pause();
     if (timerInterval) clearInterval(timerInterval);
     localStorage.setItem("CurStopTime", 0);
+    timerAudio.pause();
     // localStorage.setItem("totalSeconds", JSON.stringify(null));
-    if (watchInterval) clearInterval(watchInterval);
-    if (startBtnInterval) clearInterval(startBtnInterval);
-    if(ResetBtnInterval) clearInterval(ResetBtnInterval);
+    // if (watchInterval) clearInterval(watchInterval);
+    // if (startBtnInterval) clearInterval(startBtnInterval);
+    // if(ResetBtnInterval) clearInterval(ResetBtnInterval);
 }
 
 // Toggling when submit, X, is clicked. 
@@ -594,7 +590,7 @@ function showTimer(totalTimeInSeconds, type){
         switchStop(); 
     }
     timerInterval = setInterval(() => {
-        let remaininGTime = JSON.parse(localStorage.getItem("remainingTime"));
+        // let remaininGTime = JSON.parse(localStorage.getItem("remainingTime"));
         let timerDisplay = "";
         if (totalTimeInSeconds <= 0) {
             resetTimer();
@@ -609,7 +605,7 @@ function showTimer(totalTimeInSeconds, type){
                 showTimer(StoredSeconds, "stop");
             }
             else {
-                // localStorage.setItem("totalSeconds", JSON.stringify(null));
+                localStorage.setItem("totalSeconds", JSON.stringify(null));
             }
             return;
         }
@@ -620,12 +616,13 @@ function showTimer(totalTimeInSeconds, type){
         else if(type == "window"){
             clearInterval(timerInterval);
         }
+        else if(type == "activeStop"){
+            clearInterval(timerInterval);
+        }
         else {
             totalTimeInSeconds--;
-            remaininGTime--;
         }
         localStorage.setItem("totalSeconds", JSON.stringify(totalTimeInSeconds));
-        localStorage.setItem("remainingTime", JSON.stringify(remaininGTime));
         const [Days, hrs, mins, secs] = CalculateTimer(totalTimeInSeconds);
         displayTimer(Days, hrs, mins, secs, timerDisplay);
     }, 1000);
@@ -646,29 +643,19 @@ function Timestamp(tm){
 
 StartTimer.addEventListener("click", () => {
     const totalTimeInSeconds = returnInputTime();
-
-    // Setting current time to check this time on window load. 
-    // let lt = Timestamp(Date.now());
-    // console.log(lt);
     
     localStorage.setItem("totalSeconds", JSON.stringify(totalTimeInSeconds));
-    // console.log(totalTimeInSeconds);
+    localStorage.setItem("startTime", JSON.stringify(Date.now()));
+    console.log(totalTimeInSeconds);
     
     localStorage.setItem("StoredSeconds", JSON.stringify(totalTimeInSeconds));
     resetTimer();
     showTimer(totalTimeInSeconds, "stop");
-    switchStop();
+
     let ts = JSON.parse(localStorage.getItem("totalSeconds"));
     if(ts > 1){
         switchStop();
     }
-    
-    // new
-    localStorage.setItem("remainingTime", JSON.stringify(totalTimeInSeconds));
-    localStorage.setItem("StartTime", JSON.stringify(Date.now()));
-    console.log(Timestamp(Date.now()));
-    
-    // localStorage.setItem("StartTime")
 });
 
 let startBtnInterval;
@@ -676,11 +663,11 @@ let startStopFlag; // Start
 let isStop;
 
 startOrStopBtn.addEventListener("click", () => {
-    console.log(startOrStopBtn.innerText);
+
     if (startStopFlag) {
         // Start the timer
-        switchStop();
-        startStopFlag = false;
+        switchStop(); // Timer chal rha hai
+        localStorage.setItem("startStopFlag", startStopFlag);
 
         // Check if timer is over, restart the last used timer
         let TS = JSON.parse(localStorage.getItem("totalSeconds"));
@@ -693,38 +680,31 @@ startOrStopBtn.addEventListener("click", () => {
                 return;
             }
         }
-
+        
         resetTimer(); // Clear any existing intervals
-        // startBtnInterval = setInterval(() => {
-            if (TS <= 0) {
-                // clearInterval(timerInterval);
-                switchStart();
-                PlayTimer(); // Play the timer sound
-                return;
-            } 
-            else {
-                // TS--;
-                // localStorage.setItem("totalSeconds", JSON.stringify(TS)); // Update the stored value
-                // let timerDisplay = "";
-                // const [Days, hrs, mins, secs] = CalculateTimer(TS);
-                // displayTimer(Days, hrs, mins, secs, timerDisplay);
-                showTimer(TS ,type="stop");
-                
-            }
-        // }, 1000);
-    } 
+        if (TS <= 0) {
+            switchStart();
+            PlayTimer(); // Play the timer sound
+            return;
+        } 
+        else {
+            let remain = JSON.parse(localStorage.getItem("totalSeconds"));
+            showTimer(remain ,type="stop");               
+        }
+    }
     else {
         // Stop the timer
-        switchStart();
-        startStopFlag = true;
+        switchStart(); // Timer stopped hai
+        localStorage.setItem("startStopFlag", startStopFlag);
 
-        let curSeconds = JSON.parse(localStorage.getItem("totalSeconds"));
-        if (curSeconds > 1) {
-            resetTimer(); // Clear any existing intervals
+        let totalSeconds = JSON.parse(localStorage.getItem("totalSeconds"));
+        if (totalSeconds > 1) {
+            clearInterval(timerInterval) // Clear any existing intervals
         }
     }
 });
 
+console.log(startStopFlag);
 
 window.addEventListener("load", () => {
     SelectCur(dayOfCalender);
@@ -744,31 +724,21 @@ window.addEventListener("load", () => {
         }
     });
 
-    let startedTime = JSON.parse(localStorage.getItem("StartTime"));
     let totalSeconds = JSON.parse(localStorage.getItem("totalSeconds"));
-    let storedSeconds = JSON.parse(localStorage.getItem("StoredSeconds"));
-    console.log(totalSeconds);
-    
-
-    if (startedTime && totalSeconds) {
-        // Calculate elapsed seconds since timer started
-        let elapsedSeconds = Math.floor((Date.now() - startedTime) / 1000);
-        let remainingSeconds = storedSeconds - elapsedSeconds;
-        console.log(remainingSeconds);
-
-        // If timer should still be running
-        if (remainingSeconds > 0) {
-            localStorage.setItem("totalSeconds", remainingSeconds);
-            showTimer(remainingSeconds, "stop");
-            switchStop();
-        } else {
-            resetTimer();
-            switchStart();
-            // If auto-restart is enabled
-            if (document.querySelector("#RestartTimer").checked) {
-                showTimer(storedSeconds, "stop");
-            }
+    if (totalSeconds) {
+        let startStop = JSON.parse(localStorage.getItem("startStopFlag"));
+        let data, dataFunc;
+        if(startStop){
+            data = "activeStop";
+            dataFunc = switchStart;
         }
+        else {
+            data = "stop";
+            dataFunc = switchStop;
+        }
+
+        showTimer(totalSeconds, data);
+        dataFunc();
     }
 
     // Starting StopWatch if it Is.
@@ -776,101 +746,36 @@ window.addEventListener("load", () => {
     if (storedWatch != 0) {
         StartWatch(storedWatch);
     }
-
-    // Submit btn
-    // let StartedTime = JSON.parse(localStorage.getItem("StartTime"));
-    // console.log(Timestamp(StartedTime));
-    // // console.log(StartedTime);
-    // // console.log(Date.now() - StartedTime);
-    // console.log(Timestamp(Date.now()));
-    // // console.log(new Date());
-    
-    // let currentTime = (Date.now() - StartedTime);
-    // console.log(currentTime);
-    
-    // // console.log(currentTime);
-    
-    // if(currentTime > 0){
-    //     showTimer(currentTime, "window");
-    // }
-
-    // // Starting StopWatch if it Is.
-    // let storedWatch = JSON.parse(localStorage.getItem("CurStopTime")) || 0;
-    // if(storedWatch != 0){
-    //     StartWatch(storedWatch);
-    // }
 });
 
-// window.addEventListener("load", () => {
-//     // ... other code ...
-
-//     // Calculate remaining time properly
-//     let startedTime = JSON.parse(localStorage.getItem("StartTime"));
-//     let totalSeconds = JSON.parse(localStorage.getItem("totalSeconds"));
-//     let storedSeconds = JSON.parse(localStorage.getItem("StoredSeconds"));
-
-//     if (startedTime && storedSeconds) {
-//         // Calculate elapsed seconds since timer started
-//         let elapsedSeconds = Math.floor((Date.now() - startedTime) / 1000);
-        
-//         // Calculate remaining seconds
-//         let remainingSeconds = storedSeconds - elapsedSeconds;
-        
-//         // If timer should still be running
-//         if (remainingSeconds > 0) {
-//             localStorage.setItem("totalSeconds", remainingSeconds);
-//             showTimer(remainingSeconds, "stop");
-//             switchStop();
-//         } 
-//         // If timer should have finished
-//         else {
-//             resetTimer();
-//             switchStart();
-//             // If auto-restart is enabled
-//             if (document.querySelector("#RestartTimer").checked) {
-//                 showTimer(storedSeconds, "stop");
-//             }
-//         }
-//     }
-
-//     // Starting StopWatch if it Is.
-//     let storedWatch = JSON.parse(localStorage.getItem("CurStopTime")) || 0;
-//     if (storedWatch != 0) {
-//         StartWatch(storedWatch);
-//     }
-// });
-
-// ? Reset Button - 
-
+// ? Reset Button -
 let ResetBtn = document.querySelector(".reset");
 let ResetBtnInterval;
 
-// ResetBtn.addEventListener("click", () => {
-//     resetTimer();
+ResetBtn.addEventListener("click", () => {
+    resetTimer();
 
-//     let strSec = JSON.parse(localStorage.getItem("StoredSeconds")) || 0;
-//     if(strSec > 0){
-//         switchStop();
-//         resetTimer();
-//         ResetBtnInterval = setInterval(() => {
-//             if (strSec <= 0) {
-//                 clearInterval(ResetBtnInterval);
-//                 switchStart();
-//                 PlayTimer(); // Play the timer sound
-//                 return;
-//             } else {
-//                 strSec--;
-//                 let timerDisplay = "";
-//                 const [Days, hrs, mins, secs] = CalculateTimer(strSec);
-//                 displayTimer(Days, hrs, mins, secs, timerDisplay);
-//             }
-//         }, 1000);
-//     }
-// });
+    let strSec = JSON.parse(localStorage.getItem("StoredSeconds")) || 0;
+    if(strSec > 0){
+        switchStop();
+        resetTimer();
+        ResetBtnInterval = setInterval(() => {
+            if (strSec <= 0) {
+                clearInterval(ResetBtnInterval);
+                switchStart();
+                PlayTimer(); // Play the timer sound
+                return;
+            } else {
+                strSec--;
+                let timerDisplay = "";
+                const [Days, hrs, mins, secs] = CalculateTimer(strSec);
+                displayTimer(Days, hrs, mins, secs, timerDisplay);
+            }
+        }, 1000);
+    }
+});
 
 document.querySelector(".arrBtn").addEventListener("click", () => {
     let ts = JSON.parse(localStorage.getItem("totalSeconds"));
     console.log(ts);
-    let ss = JSON.parse(localStorage.getItem("StoredSeconds"));
-    console.log(ss);
 });
